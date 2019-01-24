@@ -17,56 +17,104 @@
 #define ZHView_width(view)      view.bounds.size.width
 #define ZHView_right(view)      view.frame.origin.x+view.bounds.size.width
 #define ZHView_bottom(view)     view.frame.origin.y+view.bounds.size.height
+#define ZHColor(r, g, b, alp)   [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(alp)/1.0]
+#define IsNULLString(string)    ((![string isKindOfClass:[NSString class]]) || [string isEqualToString:@""] || (string == nil) || [string isEqualToString:@""] || [string isKindOfClass:[NSNull class]] || [[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0 || [string isEqualToString:@"(null)"] || [string isEqualToString:@"<null>"])
 
 #import "ViewController.h"
 #import "ZHPickerView.h"
+#import "ZHAlertView.h"
+#import "MoviePlayViewController.h"
+#import "hintView.h"
 
 @interface ViewController ()
 @property (nonatomic, strong)NSArray *APIArrays;
 @property (nonatomic, strong)ZHPickerView *pkView;
 @property (nonatomic, strong)UITextField *apiTextField;
+@property (nonatomic, strong)UITextField *urlTextField;
 
 @end
 
 @implementation ViewController
 
+// 测试url : https://v.qq.com/x/cover/79npj83isb0ylvq/b0029baolzs.html?ptag=10523
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.view.backgroundColor = [UIColor grayColor];
+    self.title = @"首页";
+    self.view.backgroundColor = [UIColor whiteColor];
     [self initApiArrays];
     [self createMainUI];
     
 }
 // 创建主UI
 - (void)createMainUI{
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 100, 80, 40)];
-    titleLabel.text = @"API地址: ";
-    titleLabel.backgroundColor = [UIColor orangeColor];
-    [self.view addSubview:titleLabel];
-    self.apiTextField = [[UITextField alloc]initWithFrame:CGRectMake(ZHView_right(titleLabel), ZHView_y(titleLabel), SCREEN_WIDTH - 100 - 10, ZHView_height(titleLabel))];
-    self.apiTextField.backgroundColor = [UIColor cyanColor];
+    UILabel *apiTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 120, 80, 40)];
+    apiTitleLabel.text = @"API地址: ";
+    apiTitleLabel.backgroundColor = ZHColor(227, 227, 227, 1);
+    [self.view addSubview:apiTitleLabel];
+    
+    self.apiTextField = [[UITextField alloc]initWithFrame:CGRectMake(ZHView_right(apiTitleLabel), ZHView_y(apiTitleLabel), SCREEN_WIDTH - 100 - 10, ZHView_height(apiTitleLabel))];
+    self.apiTextField.backgroundColor = ZHColor(227, 227, 227, 1);
     self.apiTextField.placeholder = @"点击选择API地址";
     [self.view addSubview:self.apiTextField];
     UITapGestureRecognizer *apiTextFieldTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(apiTextFieldTapGesture:)];
     [self.apiTextField addGestureRecognizer:apiTextFieldTap];
     
+    UILabel *urlTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, ZHView_bottom(apiTitleLabel) + 5, ZHView_width(self.apiTextField), ZHView_height(apiTitleLabel))];
+    urlTitleLabel.text = @"视频地址:";
+    urlTitleLabel.backgroundColor = ZHColor(227, 227, 227, 1);
+    [self.view addSubview:urlTitleLabel];
+    self.urlTextField = [[UITextField alloc]initWithFrame:CGRectMake(ZHView_right(apiTitleLabel), ZHView_y(urlTitleLabel), ZHView_width(self.apiTextField), ZHView_height(urlTitleLabel))];
+    self.urlTextField.backgroundColor = ZHColor(227, 227, 227, 1);
+    self.urlTextField.placeholder = @"输入视频url地址";
+//    self.urlTextField.text = @"https://v.qq.com/x/cover/79npj83isb0ylvq/b0029baolzs.html?ptag=10523"; // 先写死
+    [self.view addSubview:self.urlTextField];
+    
+    // 播放按钮
+    UIButton *playBtn = [UIButton buttonWithType:0];
+    playBtn.frame = CGRectMake(70, ZHView_bottom(urlTitleLabel) + 50, SCREEN_WIDTH - 140, 50);
+    playBtn.backgroundColor = [UIColor blueColor];
+    [playBtn addTarget:self action:@selector(playBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [playBtn setTitle:@"播放" forState:UIControlStateNormal];
+    [self.view addSubview:playBtn];
+    
+    // 提示
+    hintView *hintV = [[hintView alloc]initWithFrame:CGRectMake(10, ZHView_bottom(playBtn) + 50, SCREEN_WIDTH - 20, 200)];
+//    hintV.backgroundColor = [UIColor blueColor];
+    [self.view addSubview:hintV];
+    
+    
+    
+}
+- (void)playBtnClick{
+    if (IsNULLString(self.urlTextField.text) || IsNULLString(self.apiTextField.text)) {
+        [ZHAlertView showOneBtnAlertViewWithMessage:@"请选择API地址和输入视频地址" enterClick:^(NSString *zhString) {
+            
+        } andController:self];
+    }else{
+        MoviePlayViewController *moviePlayVC = [[MoviePlayViewController alloc]init];
+        moviePlayVC.urlStr = [self SplicingWithOneStr:self.apiTextField.text andTwoStr:self.urlTextField.text];
+        [self.navigationController pushViewController:moviePlayVC animated:YES];
+    }
 }
 - (void)apiTextFieldTapGesture:(UITapGestureRecognizer *)gesture{
     NSLog(@"---%@",self.apiTextField.text);
     [self createPickerView];
 }
+- (NSString *)SplicingWithOneStr:(NSString *)str1 andTwoStr:(NSString *)str2{
+    return [NSString stringWithFormat:@"http://%@%@", str1, str2];
+}
 // 创建pickerView
 - (void)createPickerView{
     __weak __typeof__(self) weakSelf = self;
-    self.pkView = [[ZHPickerView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 220, SCREEN_WIDTH, 200) DataArr:self.APIArrays andTitle:nil];
-    self.pkView.backgroundColor = [UIColor orangeColor];
+    self.pkView = [[ZHPickerView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 300, SCREEN_WIDTH, 300) DataArr:self.APIArrays andTitle:nil];
+    self.pkView.backgroundColor = ZHColor(235, 235, 235, 1);
     self.pkView.confirmBtnClick = ^(NSString *nameStr) {
         NSLog(@"点击了确定选中的内容是--%@", nameStr);
         [weakSelf.pkView removeFromSuperview];
         weakSelf.pkView = nil;
         if (nameStr == nil) {
-            weakSelf.apiTextField.text = @"www.82190555.com/index/qqvod.php?url=";
+            weakSelf.apiTextField.text = @"www.82190555.com/index/qqvod.php?url="; // 默认
         }else{
             weakSelf.apiTextField.text = nameStr;
         }
@@ -85,10 +133,7 @@
     if (self.pkView) {
         NSLog(@"存在");
         [self.pkView removeFromSuperview];
-        self.pkView = nil; // 释放pkView
-
-    }else{
-        NSLog(@"不存在");
+        self.pkView = nil;
     }
 }
 

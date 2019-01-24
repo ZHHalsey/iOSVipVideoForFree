@@ -11,6 +11,7 @@
 #define ZHView_width(view) view.bounds.size.width
 #define ZHView_right(view) view.frame.origin.x+view.bounds.size.width
 #define ZHView_bottom(view) view.frame.origin.y+view.bounds.size.height
+#define ZHColor(r, g, b, alp)   [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(alp)/1.0]
 
 #import "ZHPickerView.h"
 
@@ -26,6 +27,7 @@
         btn.frame = CGRectMake(self.bounds.size.width - 130, 0, 100, 40);
 //        btn.backgroundColor = [UIColor cyanColor];
         [btn setTitle:@"完成" forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btn];
         
@@ -33,6 +35,7 @@
         UIButton *btn1 = [UIButton buttonWithType:0];
         btn1.frame = CGRectMake(30, 0, 100, 40);
         [btn1 setTitle:@"取消" forState:UIControlStateNormal];
+        [btn1 setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [btn1 addTarget:self action:@selector(CancelbtnClick) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btn1];
 
@@ -45,7 +48,8 @@
         [self addSubview:titleLabel];
         
         // 下面的picker
-        UIPickerView *pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(10, 80, self.bounds.size.width - 20, self.bounds.size.height - 90)];
+        UIPickerView *pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, 50, self.bounds.size.width, self.bounds.size.height - 50)];
+        pickerView.backgroundColor = ZHColor(227, 227, 227, 1);
 //        pickerView.backgroundColor = [UIColor redColor];
         pickerView.delegate = self;
         pickerView.dataSource = self;

@@ -16,6 +16,9 @@
 		F99D1B8E21F956F000C4E094 /* iOSVipVideoForFreeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F99D1B8D21F956F000C4E094 /* iOSVipVideoForFreeTests.m */; };
 		F99D1B9921F956F000C4E094 /* iOSVipVideoForFreeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F99D1B9821F956F000C4E094 /* iOSVipVideoForFreeUITests.m */; };
 		F99D1BA821F95FCC00C4E094 /* ZHPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F99D1BA621F95FCC00C4E094 /* ZHPickerView.m */; };
+		F99D1BAB21F9910400C4E094 /* ZHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = F99D1BA921F9910400C4E094 /* ZHAlertView.m */; };
+		F99D1BAE21F992EC00C4E094 /* MoviePlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F99D1BAD21F992EC00C4E094 /* MoviePlayViewController.m */; };
+		F99D1BB421F9A06100C4E094 /* hintView.m in Sources */ = {isa = PBXBuildFile; fileRef = F99D1BB321F9A06100C4E094 /* hintView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +57,12 @@
 		F99D1B9A21F956F000C4E094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F99D1BA621F95FCC00C4E094 /* ZHPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHPickerView.m; sourceTree = "<group>"; };
 		F99D1BA721F95FCC00C4E094 /* ZHPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHPickerView.h; sourceTree = "<group>"; };
+		F99D1BA921F9910400C4E094 /* ZHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHAlertView.m; sourceTree = "<group>"; };
+		F99D1BAA21F9910400C4E094 /* ZHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHAlertView.h; sourceTree = "<group>"; };
+		F99D1BAC21F992EC00C4E094 /* MoviePlayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoviePlayViewController.h; sourceTree = "<group>"; };
+		F99D1BAD21F992EC00C4E094 /* MoviePlayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoviePlayViewController.m; sourceTree = "<group>"; };
+		F99D1BB221F9A06100C4E094 /* hintView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hintView.h; sourceTree = "<group>"; };
+		F99D1BB321F9A06100C4E094 /* hintView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = hintView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,8 +117,14 @@
 				F99D1B7521F956EF00C4E094 /* AppDelegate.m */,
 				F99D1B7721F956EF00C4E094 /* ViewController.h */,
 				F99D1B7821F956EF00C4E094 /* ViewController.m */,
+				F99D1BAC21F992EC00C4E094 /* MoviePlayViewController.h */,
+				F99D1BAD21F992EC00C4E094 /* MoviePlayViewController.m */,
 				F99D1BA721F95FCC00C4E094 /* ZHPickerView.h */,
 				F99D1BA621F95FCC00C4E094 /* ZHPickerView.m */,
+				F99D1BAA21F9910400C4E094 /* ZHAlertView.h */,
+				F99D1BA921F9910400C4E094 /* ZHAlertView.m */,
+				F99D1BB221F9A06100C4E094 /* hintView.h */,
+				F99D1BB321F9A06100C4E094 /* hintView.m */,
 				F99D1B7A21F956EF00C4E094 /* Main.storyboard */,
 				F99D1B7D21F956F000C4E094 /* Assets.xcassets */,
 				F99D1B7F21F956F000C4E094 /* LaunchScreen.storyboard */,
@@ -268,9 +283,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F99D1BA821F95FCC00C4E094 /* ZHPickerView.m in Sources */,
+				F99D1BAB21F9910400C4E094 /* ZHAlertView.m in Sources */,
 				F99D1B7921F956EF00C4E094 /* ViewController.m in Sources */,
 				F99D1B8421F956F000C4E094 /* main.m in Sources */,
+				F99D1BB421F9A06100C4E094 /* hintView.m in Sources */,
 				F99D1B7621F956EF00C4E094 /* AppDelegate.m in Sources */,
+				F99D1BAE21F992EC00C4E094 /* MoviePlayViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
