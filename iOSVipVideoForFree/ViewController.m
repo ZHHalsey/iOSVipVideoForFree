@@ -26,10 +26,11 @@
 #import "MoviePlayViewController.h"
 #import "hintView.h"
 
-@interface ViewController ()
+@interface ViewController ()<UITextFieldDelegate>
 @property (nonatomic, strong)NSArray *APIArrays;
 @property (nonatomic, strong)ZHPickerView *pkView;
 @property (nonatomic, strong)UITextField *apiTextField;
+//@property (nonatomic, strong)UILabel *apiTextField;
 @property (nonatomic, strong)UITextField *urlTextField;
 
 @end
@@ -55,6 +56,7 @@
     
     self.apiTextField = [[UITextField alloc]initWithFrame:CGRectMake(ZHView_right(apiTitleLabel), ZHView_y(apiTitleLabel), SCREEN_WIDTH - 100 - 10, ZHView_height(apiTitleLabel))];
     self.apiTextField.backgroundColor = ZHColor(227, 227, 227, 1);
+    self.apiTextField.delegate = self;
     self.apiTextField.placeholder = @"点击选择API地址";
     [self.view addSubview:self.apiTextField];
     UITapGestureRecognizer *apiTextFieldTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(apiTextFieldTapGesture:)];
@@ -86,6 +88,10 @@
     
     
 }
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    [textField resignFirstResponder]; // api禁止弹键盘
+    return NO;
+}
 - (void)playBtnClick{
     if (IsNULLString(self.urlTextField.text) || IsNULLString(self.apiTextField.text)) {
         [ZHAlertView showOneBtnAlertViewWithMessage:@"请选择API地址和输入视频地址" enterClick:^(NSString *zhString) {
@@ -99,7 +105,9 @@
 }
 - (void)apiTextFieldTapGesture:(UITapGestureRecognizer *)gesture{
     NSLog(@"---%@",self.apiTextField.text);
-    [self createPickerView];
+    if (!self.pkView) {
+        [self createPickerView];
+    }
 }
 - (NSString *)SplicingWithOneStr:(NSString *)str1 andTwoStr:(NSString *)str2{
     return [NSString stringWithFormat:@"http://%@%@", str1, str2];
