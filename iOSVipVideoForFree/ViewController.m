@@ -130,6 +130,7 @@
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     NSLog(@"点击了屏幕");
+    [self.view endEditing:YES];
     if (self.pkView) {
         NSLog(@"存在");
         [self.pkView removeFromSuperview];
