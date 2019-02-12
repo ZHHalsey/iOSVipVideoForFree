@@ -57,6 +57,7 @@
     self.apiTextField = [[UITextField alloc]initWithFrame:CGRectMake(ZHView_right(apiTitleLabel), ZHView_y(apiTitleLabel), SCREEN_WIDTH - 100 - 10, ZHView_height(apiTitleLabel))];
     self.apiTextField.backgroundColor = ZHColor(227, 227, 227, 1);
     self.apiTextField.delegate = self;
+    self.apiTextField.text = @"www.82190555.com/index/qqvod.php?url="; // 写死
     self.apiTextField.placeholder = @"点击选择API地址";
     [self.view addSubview:self.apiTextField];
     UITapGestureRecognizer *apiTextFieldTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(apiTextFieldTapGesture:)];
