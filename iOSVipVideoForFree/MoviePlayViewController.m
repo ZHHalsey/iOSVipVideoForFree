@@ -84,9 +84,6 @@
 }
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
     NSLog(@"页面加载完成");
-    //修改加载的webView的字体大小 250%
-    [ webView evaluateJavaScript:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '100%'"completionHandler:nil];
-    NSLog(@"标题是--%@",self.wkWeb.title); // 加载完成的时候可以取到这个网页的title
 }
 - (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error{
     [ZHAlertView showOneBtnAlertViewWithMessage:@"加载失败, 请查看输入的视频地址是否正确" enterClick:^(NSString *zhString) {

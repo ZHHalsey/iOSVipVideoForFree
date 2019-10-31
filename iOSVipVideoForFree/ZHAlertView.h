@@ -1,6 +1,6 @@
 //
 //  ZHAlertView.h
-//  Block的封装
+//  ZHAlertView
 //
 //  Created by ZZZZZ on 16/10/10.
 //  Copyright © 2016年 张豪. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  ZHAlertView.m
-//  Block的封装
+//  ZHAlertView
 //
 //  Created by ZZZZZ on 16/10/10.
 //  Copyright © 2016年 张豪. All rights reserved.
@@ -54,7 +54,7 @@
     
     UIAlertController *alertCon = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleActionSheet]; // 弹窗
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:btnUpTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        btnUpClick(); // btnUpClick() 这个block代表的就是这个大括号{}里面的所有的代码, 所以是代码块
+        btnUpClick();
     }];
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:btnDownTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         btnDownClick();

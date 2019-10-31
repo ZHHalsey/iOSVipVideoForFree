@@ -70,7 +70,7 @@
     self.urlTextField = [[UITextField alloc]initWithFrame:CGRectMake(ZHView_right(apiTitleLabel), ZHView_y(urlTitleLabel), ZHView_width(self.apiTextField), ZHView_height(urlTitleLabel))];
     self.urlTextField.backgroundColor = ZHColor(227, 227, 227, 1);
     self.urlTextField.placeholder = @"输入视频url地址";
-//    self.urlTextField.text = @"https://v.qq.com/x/cover/79npj83isb0ylvq/b0029baolzs.html?ptag=10523"; // 先写死
+//    self.urlTextField.text = @"https://v.qq.com/x/cover/79npj83isb0ylvq/b0029baolzs.html?ptag=10523"; // 测试用
     [self.view addSubview:self.urlTextField];
     
     // 播放按钮
